@@ -251,22 +251,28 @@ export const list = [
     },
     {
         "question": "2003-yil qanday muhim hujjat tasdiqlandi:",
-        "correctAnswer": "”Ta`lim hamma uchun” dakar milliy dasturi",
+        "correctAnswer": "Ta`lim hamma uchun dakar milliy dasturi",
         "options": [
-            "”Ta`lim hamma uchun” dakar milliy dasturi",
-            "“Nogironlar huquqini ijtimoiy himoyalash to`g`risida”gi qonuni",
+            "Ta`lim hamma uchun” dakar milliy dasturi",
+            "Nogironlar huquqini ijtimoiy himoyalash to`g`risida”gi qonuni",
             "Nogironlarning ta`lim olish huquqlarini ta`minlovchi salamanka bayonoti va ish faoliyati rejasi",
-            "”Inson huquqlari umumjahon deklaratsiyasi”"
+            "Inson huquqlari umumjahon deklaratsiyasi"
         ]
     },
     {
-        "question": "1948-yil qanday muhim  hujjat imnolandi: 1971-yilda qanday muhim hujjat imzolandi:",
+        "question": "1948-yil qanday muhim  hujjat imnolandi:",
+        "correctAnswer": "Inson huquqlari umumjahon deklaratsiyasi",
+        "options": [
+            "Inson huquqlari umumjahon deklaratsiyasi",
+            "Ta`lim hamma uchun” dakar deklaratsiyasi",
+            "Nogironlar huquqini ijtimoiy himoyalash to`g`risida”gi qonuni",
+            "Nogironlarning ta`lim olish huquqlarini ta`minlovchi salamanka bayonoti va ish faoliyati rejasi",
+        ]
+    },
+    {
+        "question": "1971-yilda qanday muhim hujjat imzolandi:",
         "correctAnswer": "”Aqli zaif shaxslar huquqlari” To`g`risidagi deklaratsiya",
         "options": [
-            "”Inson huquqlari umumjahon deklaratsiyasi”",
-            "”Ta`lim hamma uchun” dakar deklaratsiyasi",
-            "“Nogironlar huquqini ijtimoiy himoyalash to`g`risida”gi qonuni",
-            "Nogironlarning ta`lim olish huquqlarini ta`minlovchi salamanka bayonoti va ish faoliyati rejasi",
             "”Aqli zaif shaxslar huquqlari” To`g`risidagi deklaratsiya",
             "”Inson huquqlari umumjahon deklaratsiyasi”",
             "”Ta`lim hamma uchun” dakar deklaratsiyasi",

@@ -87,58 +87,198 @@ function handleAnswerSelection(question, selectedOption) {
 </script>
 
 <template>
-  <div>
-    <h1>Questions</h1>
-    <div v-if="!isTestCompleted">
-      <label for="test-count">Показать по:</label>
+  <div class="test-container">
+    <h1 class="title">Тесты</h1>
 
-      <input
-          id="test-count"
-          type="number"
-          v-model.number="numberOfTests"
-          min="10"
-          max="100"
-      />
-      <br></br>
-      <Select
-          v-model="numberOfGroups"
-          :options="groupOptions"
-          optionLabel="label"
-          placeholder="Select a Group"
-          class="w-full md:w-56"
-      />
-      <br>
+    <div v-if="!isTestCompleted" class="controls">
+      <div class="control-group">
+        <label for="test-count">Количество вопросов:</label>
+        <input
+            id="test-count"
+            type="number"
+            v-model.number="numberOfTests"
+            min="10"
+            max="100"
+            class="input-field"
+        />
+      </div>
 
-      <Button @click="startTest">Start</Button>
+      <div class="control-group">
+        <label for="group-select">Выберите группу:</label>
+        <Select
+            id="group-select"
+            v-model="numberOfGroups"
+            :options="groupOptions"
+            optionLabel="label"
+            placeholder="Выберите группу"
+            class="dropdown"
+        />
+      </div>
+
+      <Button @click="startTest" label="Начать тест" class="start-button" />
     </div>
-    <div v-if="!isTestCompleted">
+
+    <div v-if="!isTestCompleted" class="questions-list">
       <ul>
-        <li v-for="(question, index) in shuffledQuestions" :key="question.question + renderKey">
-          <h2>{{ question.question }}</h2>
-          <ul>
-            <li v-for="option in question.options" :key="option + renderKey">
+        <li
+            v-for="(question, index) in shuffledQuestions"
+            :key="question.question + renderKey"
+            class="question-item"
+        >
+          <h2 class="question">{{ question.question }}</h2>
+          <ul class="options-list">
+            <li
+                v-for="option in question.options"
+                :key="option + renderKey"
+                class="option-item"
+            >
               <input
                   type="radio"
                   :name="question.question + renderKey"
                   :value="option"
                   @change="handleAnswerSelection(question, option)"
                   :disabled="selectedAnswers[question.question]"
+                  class="radio-button"
               />
-              <label>{{ option }}</label>
+              <label class="option-label">{{ option }}</label>
             </li>
           </ul>
-          <p v-if="feedback[question.question]">{{ feedback[question.question] }}</p>
+          <p
+              v-if="feedback[question.question]"
+              class="feedback"
+              :class="{ correct: feedback[question.question] === 'Правильно!', incorrect: feedback[question.question] === 'Неправильно' }"
+          >
+            {{ feedback[question.question] }}
+          </p>
         </li>
       </ul>
     </div>
-    <div v-else>
-      <h2>Test Completed!</h2>
-      <p>Вы правильно ответили на {{ correctAnswersCount }} вопроса из {{ numberOfTests   }}.</p>
-      <button @click="startTest">Restart</button>
+
+    <div v-else class="result-container">
+      <h2>Тест завершён!</h2>
+      <p class="result-message">
+        Вы правильно ответили на {{ correctAnswersCount }} из {{ numberOfTests }} вопросов.
+      </p>
+      <Button @click="startTest" label="Перезапустить" class="restart-button" />
     </div>
   </div>
 </template>
 
 <style scoped>
-/* Optional styling */
+/* Основные стили */
+.test-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Стили для панели управления */
+.controls {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-field {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.dropdown {
+  width: 100%;
+}
+
+.start-button {
+  align-self: center;
+  background-color: #007ad9;
+  color: white;
+}
+
+/* Стили для вопросов */
+.questions-list {
+  margin-top: 20px;
+}
+
+.question-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.question {
+  color: #444;
+}
+
+.options-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.option-item {
+  margin: 5px 0;
+}
+
+.radio-button {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.option-label {
+  font-size: 18px; /* Увеличить размер шрифта для текста рядом с кнопками */
+  cursor: pointer; /* Удобство для взаимодействия */
+}
+
+
+.feedback {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.feedback.correct {
+  color: green;
+}
+
+.feedback.incorrect {
+  color: red;
+}
+
+/* Стили для результата */
+.result-container {
+  text-align: center;
+}
+
+.result-message {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.restart-button {
+  margin-top: 20px;
+  background-color: #007ad9;
+  color: white;
+}
 </style>
+
